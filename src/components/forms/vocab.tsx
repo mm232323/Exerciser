@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useState } from "react";
 import { Deck } from "../../../helpers/interfaces";
@@ -95,7 +94,7 @@ const VocabForm: React.FC<{ decks: Deck[] }> = ({ decks }) => {
                 size={20}
                 color="#49243E"
                 onClick={() =>
-                  setSentences((_prevSentences) => [...sentences, ""])
+                  setSentences((prevSentences) => [...prevSentences, ""])
                 }
                 cursor="pointer"
               />

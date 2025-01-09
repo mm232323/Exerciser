@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { redirect, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { getUser, prepareQuestions } from "../../../../actions/main";
@@ -66,5 +66,11 @@ const StartPractice: React.FC = () => {
     </main>
   );
 };
-
-export default StartPractice;
+const StartPracticePage = () => {
+  return (
+    <Suspense>
+      <StartPractice />
+    </Suspense>
+  );
+};
+export default StartPracticePage;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect, useState } from "react";
@@ -44,9 +43,9 @@ const ConnectTest: React.FC<{
           onHandleComplete(true, compressedAnswer);
         }
         setAnswers((prevAnswer) => [...prevAnswer, [value, answer[0]]]);
-        setAnswer((prevAns) => ["", ""]);
+        setAnswer(() => ["", ""]);
       } else {
-        setAnswer((prevAns) => ["", value]);
+        setAnswer(() => ["", value]);
       }
     } else {
       if (answer[1]) {
@@ -57,9 +56,9 @@ const ConnectTest: React.FC<{
           onHandleComplete(true, compressedAnswer);
         }
         setAnswers((prevAnswer) => [...prevAnswer, [answer[1], value]]);
-        setAnswer((prevAns) => ["", ""]);
+        setAnswer(() => ["", ""]);
       } else {
-        setAnswer((prevAns) => [value, ""]);
+        setAnswer(() => [value, ""]);
       }
     }
   };

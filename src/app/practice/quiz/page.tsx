@@ -11,7 +11,7 @@ import { AnimatePresence } from "framer-motion";
 
 const PracticeQuizPage: React.FC = () => {
   const { data: session } = useSession();
-  const [tests, setTests] = useState<TestType[] | null>(null);
+  const [tests, setTests] = useState<TestType[]>([]);
   const [testIdx, setTestIdx] = useState<number>(0);
   const [testState, setTestState] = useState<boolean>(false);
   const [testAnswer, setTestAnswer] = useState<string>("");

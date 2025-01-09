@@ -18,7 +18,7 @@ const CompleteTest: React.FC<{
         (word[0] as string).toLowerCase() === properties.word.toLowerCase()
     )
     .map((word) => ["", word[1]]);
-  const [_, setAnswers] = useState(targeted);
+  const [answers, setAnswers] = useState(targeted);
   const [toggleHint, setToggleHint] = useState(false);
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -35,6 +35,7 @@ const CompleteTest: React.FC<{
       return newAnswers;
     });
   };
+  console.log(answers);
   return (
     <motion.main
       variants={{
