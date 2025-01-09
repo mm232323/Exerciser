@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { redirect, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { getUser } from "../../../../actions/main";
+import { getUser, prepareQuestions } from "../../../../actions/main";
 import { practicedType, userInputType } from "../../../../helpers/interfaces";
 import Image from "next/image";
 const StartPractice: React.FC = () => {
@@ -23,7 +23,7 @@ const StartPractice: React.FC = () => {
   useEffect(() => {
     if (user)
       setPractices(
-        user.practiced.filter((practice) => practice.deckName == deckName)
+        user.practiced.filter((practice) => practice.deck == deckName)
       );
   }, [deckName, user]);
   if (deckName == undefined) redirect("/practice");
@@ -56,7 +56,10 @@ const StartPractice: React.FC = () => {
         </p>
       </div>
       <center>
-        <button className="w-[560px] h-[90px] rounded-full bg-[#8858AE] font-light text-white text-[25px] mt-[20px] mb-[10px] hover:bg-[#a45fbb] duration-[350ms]">
+        <button
+          className="w-[560px] h-[90px] rounded-full bg-[#8858AE] font-light text-white text-[25px] mt-[20px] mb-[10px] hover:bg-[#a45fbb] duration-[350ms]"
+          onClick={() => prepareQuestions(deckName)}
+        >
           Let&rsquo;s Start
         </button>
       </center>

@@ -1,8 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import LoginForm from "@/components/forms/login";
-
-const LoginPage: React.FC = () => {
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+const LoginPage: React.FC = async () => {
+  const session = await getServerSession();
+  if (session) {
+    redirect("/profile");
+  }
   return (
     <>
       <Image

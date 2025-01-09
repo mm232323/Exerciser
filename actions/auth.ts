@@ -23,6 +23,7 @@ export const signup = async (state: unknown, event: FormData) => {
   data.practiced = [];
   data.languages = [];
   data.avatar = "";
+  data.progress = { state: "off", deck: "", tests: [] };
   const response = await fetch(`${process.env.SERVER_HOST}/auth/signup`, {
     method: "POST",
     body: JSON.stringify({ user: data }),

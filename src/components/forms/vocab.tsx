@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useState } from "react";
 import { Deck } from "../../../helpers/interfaces";
@@ -11,6 +12,16 @@ const VocabForm: React.FC<{ decks: Deck[] }> = ({ decks }) => {
   if (state.includes("done")) {
     redirect("/practice");
   }
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    idx: number
+  ) => {
+    setSentences((prevSentences) => {
+      const newSentences = [...prevSentences];
+      newSentences[idx] = event.target.value;
+      return newSentences;
+    });
+  };
   return (
     <div className="relative top-[50px] w-8/12 h-fit">
       <h1 className="w-full border-[.5px] border-[#49243E] rounded-[15px] text-[#D8D4D7] font-bold bg-[#49243E] pl-[10px] pt-[4px] text-center h-[73px] mb-[22px] text-[50px]">
@@ -71,18 +82,21 @@ const VocabForm: React.FC<{ decks: Deck[] }> = ({ decks }) => {
               : " border-red-800 text-red-900"
           }`}
         />
-        {sentences.map((sentence, index) => (
+        {sentences.map((_sentence, index) => (
           <div key={index} className="flex gap-2 w-full items-center">
             <input
               type="text"
-              placeholder="make a sentence"
+              placeholder="make a sentence (must include the vocab)"
+              onChange={(event) => handleChange(event, index)}
               className="w-full h-[60px] pl-[15px] rounded-[15px] bg-transparent border-[.5px] border-[#49243e] focus:outline-none duration-[350ms]"
             />
             {index == sentences.length - 1 && (
               <MdAdd
                 size={20}
                 color="#49243E"
-                onClick={() => setSentences([...sentences, ""])}
+                onClick={() =>
+                  setSentences((_prevSentences) => [...sentences, ""])
+                }
                 cursor="pointer"
               />
             )}
@@ -90,7 +104,7 @@ const VocabForm: React.FC<{ decks: Deck[] }> = ({ decks }) => {
         ))}
         <input
           type="text"
-          defaultValue={sentences.join("|")}
+          value={sentences.join("|")}
           name="sentences"
           className="hidden"
         />

@@ -36,7 +36,7 @@ const Header: React.FC = () => {
               Home
             </h1>
           </Link>
-          <Link href="/dashboard">
+          <Link href="/profile">
             <h1
               className={`text-[20px] hover:opacity-70 duration-300 ${
                 pathname === "/dashboard" ? "opacity-70" : "cursor-pointer"
@@ -81,13 +81,15 @@ const Header: React.FC = () => {
               </>
             ) : (
               <>
-                <Image
-                  src={avatar ? avatar : "/avatar.svg"}
-                  alt="avatar"
-                  width={65}
-                  height={65}
-                  className="rounded-full"
-                />
+                <Link href="/profile">
+                  <Image
+                    src={avatar ? avatar : "/avatar.svg"}
+                    alt="avatar"
+                    width={65}
+                    height={65}
+                    className="rounded-full"
+                  />
+                </Link>
                 <div
                   className="flex items-center justify-center w-[65px] h-[65px] bg-[rgba(0,0,0,.06)] rounded-full cursor-pointer"
                   onClick={handleSignOut}

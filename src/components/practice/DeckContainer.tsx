@@ -10,7 +10,10 @@ const DeckContainer: React.FC<{
 }> = ({ deck, onDeleteDeck, rank }) => {
   let sentencesCount = 0;
   for (let i = 0; i < deck.cards.length; i++) {
-    sentencesCount += deck.cards[i].sentences.length;
+    const sentences = deck.cards[i].sentences
+      .split("|")
+      .filter((sentence) => sentence.length !== 0);
+    sentencesCount += sentences.length;
   }
   return (
     <motion.div

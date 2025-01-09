@@ -1,8 +1,16 @@
+import {
+  chooseTest,
+  completeTest,
+  connectTest,
+  correctionTest,
+  meaningTest,
+} from "./testTypes";
+
 export interface Card {
   name: string;
   translation: string;
   type: string;
-  sentences: string[];
+  sentences: string;
   deck: string;
 }
 export interface Deck {
@@ -23,6 +31,7 @@ export interface userInputType {
   practiced: practicedType[];
   languages: { name: string; score: number }[];
   avatar: string;
+  progress: { state: string; deck: string; tests: object[] };
 }
 export interface personalInpType {
   gender: string;
@@ -31,6 +40,21 @@ export interface personalInpType {
 }
 
 export interface practicedType {
-  deckName: string;
-  practiced: number;
+  deck: string;
+  score: number;
+  maxScore: number;
+  finalScore: number;
+  tests: object[];
+  state: string;
+  language: string;
+}
+export interface TestType {
+  name: string;
+  properties:
+    | meaningTest
+    | chooseTest
+    | connectTest
+    | completeTest
+    | correctionTest;
+  answer: string;
 }

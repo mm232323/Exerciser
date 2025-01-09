@@ -1,8 +1,21 @@
 "use server";
 
 import { getServerSession } from "next-auth";
-import { Card, Deck, personalInpType } from "../helpers/interfaces";
+import {
+  Card,
+  Deck,
+  personalInpType,
+  userInputType,
+} from "../helpers/interfaces";
 import cloudinary from "cloudinary";
+import {
+  ChooseTest,
+  CompleteTest,
+  ConnectTest,
+  CorrectionTest,
+  MeaningTest,
+} from "../helpers/questionsHandlers";
+import { redirect } from "next/navigation";
 
 export async function getUser(email: string) {
   const response = await fetch(`${process.env.SERVER_HOST}/auth/get-user`, {
@@ -133,4 +146,114 @@ export async function deleteDeck(deckName: string, email: string) {
   const { message } = await response.json();
   console.log(message);
   return ["done"];
+}
+
+export async function prepareQuestions(deckName: string) {
+  const tests = new Array(20).fill({
+    name: "",
+    properties: {},
+  });
+  const session = await getServerSession();
+  const response = await fetch(`${process.env.SERVER_HOST}/user/get-deck`, {
+    method: "POST",
+    body: JSON.stringify({ deckName, email: session?.user?.email }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const { deck }: { deck: Deck } = await response.json();
+  const types = ["meaning", "choose", "complete", "trueorfalse", "connect"];
+  for (let i = 0; i < tests.length; i++) {
+    const type = types[Math.floor(Math.random() * types.length)];
+    const card = deck.cards[Math.floor(Math.random() * deck.cards.length)];
+    if (type == "meaning") {
+      const test = MeaningTest(card);
+      tests[i] = test;
+    } else if (type == "choose") {
+      const test = ChooseTest(card, deck.cards);
+      tests[i] = test;
+    } else if (type == "complete") {
+      if (card.sentences.length == 0) {
+        i -= 1;
+        continue;
+      }
+      const test = CompleteTest(card);
+      tests[i] = test;
+    } else if (type == "trueorfalse") {
+      const test = CorrectionTest(
+        card,
+        deck.cards.map((card) => card.translation)
+      );
+      tests[i] = test;
+    } else {
+      const test = ConnectTest(deck.cards);
+      tests[i] = test;
+    }
+  }
+  const response2 = await fetch(`${process.env.SERVER_HOST}/user/set-tests`, {
+    method: "POST",
+    body: JSON.stringify({
+      email: session?.user?.email,
+      tests,
+      deck: deckName,
+      state: "on",
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const { message } = await response2.json();
+  console.log(message);
+  redirect("/practice/quiz");
+}
+
+export async function setAnswer(testIdx: number, answer: string) {
+  const session = await getServerSession();
+  const response = await fetch(`${process.env.SERVER_HOST}/user/set-answer`, {
+    method: "POST",
+    body: JSON.stringify({ testIdx, answer, email: session?.user?.email }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const { message } = await response.json();
+  console.log(message);
+}
+
+export async function setPracticedTest() {
+  const session = await getServerSession();
+  const email = session?.user?.email;
+  const user = (await getUser(session?.user?.email as string)) as userInputType;
+  const { tests, deck } = user.progress;
+  const language = user.decks.filter((d) => d.name == deck)[0].lang;
+  const MAX_SCORE = 20;
+  let points = 0;
+  for (let i = 0; i < tests.length; i++) {
+    if (
+      (tests[i] as { answer: string }).answer.toLowerCase() ==
+      (tests[i] as { correctAnswer: string }).correctAnswer.toLowerCase()
+    )
+      points++;
+  }
+  const finalScore = (points / MAX_SCORE) * 100;
+  const response = await fetch(
+    `${process.env.SERVER_HOST}/user/set-practiced`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        language,
+        score: points,
+        maxScore: MAX_SCORE,
+        finalScore,
+        deck,
+        tests,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const { message } = await response.json();
+  console.log(message);
 }
