@@ -207,11 +207,16 @@ export async function prepareQuestions(deckName: string) {
   redirect("/practice/quiz");
 }
 
-export async function setAnswer(testIdx: number, answer: string) {
+export async function setAnswer(testIdx: number, answer: string, deck: string) {
   const session = await getServerSession();
   const response = await fetch(`${process.env.SERVER_HOST}/user/set-answer`, {
     method: "POST",
-    body: JSON.stringify({ testIdx, answer, email: session?.user?.email }),
+    body: JSON.stringify({
+      testIdx,
+      answer,
+      email: session?.user?.email,
+      deck,
+    }),
     headers: {
       "Content-Type": "application/json",
     },

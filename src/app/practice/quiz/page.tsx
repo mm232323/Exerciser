@@ -15,6 +15,7 @@ const PracticeQuizPage: React.FC = () => {
   const [testIdx, setTestIdx] = useState<number>(0);
   const [testState, setTestState] = useState<boolean>(false);
   const [testAnswer, setTestAnswer] = useState<string>("");
+  const [deck, setDeck] = useState<string>("");
   useEffect(() => {
     async function getTests() {
       if (session?.user) {
@@ -22,6 +23,7 @@ const PracticeQuizPage: React.FC = () => {
           .progress;
         if (progress.state == "off") redirect("/practice");
         setTests(progress.tests);
+        setDeck(progress.deck);
       }
     }
     getTests();
@@ -37,7 +39,7 @@ const PracticeQuizPage: React.FC = () => {
     } else {
       if (testState) {
         setTestIdx((prevIdx) => prevIdx + 1);
-        setAnswer(testIdx, testAnswer);
+        setAnswer(testIdx, testAnswer, deck);
         setTestState(false);
       }
     }

@@ -113,18 +113,15 @@ export function CorrectionTest(card: Card, translations: string[]) {
     translations[Math.floor(Math.random() * translations.length)];
   const choosenQT = testQTs[Math.floor(Math.random() * testQTs.length)];
   let correctAnswer = "";
-  if (
-    choosenQT == "meaning" &&
-    choosedTranslation.toLowerCase() == card.translation.toLowerCase()
-  )
-    correctAnswer = "True";
-  else correctAnswer = "False";
-  if (
-    choosenQT == "type" &&
-    choosedType.toLowerCase() == card.type.toLowerCase()
-  )
-    correctAnswer = "True";
-  else correctAnswer = "False";
+  if (choosenQT == "meaning") {
+    if (choosedTranslation.toLowerCase() == card.translation.toLowerCase())
+      correctAnswer = "True";
+    else correctAnswer = "False";
+  } else {
+    if (choosedType.toLowerCase() == card.type.toLowerCase())
+      correctAnswer = "True";
+    else correctAnswer = "False";
+  }
   const test = {
     name: "trueorfalse",
     properties: {

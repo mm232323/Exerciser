@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           <Link href="/profile">
             <h1
               className={`text-[20px] hover:opacity-70 duration-300 ${
-                pathname === "/dashboard" ? "opacity-70" : "cursor-pointer"
+                pathname === "/profile" ? "opacity-70" : "cursor-pointer"
               }`}
             >
               Dashboard
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
           <Link href="/practice">
             <h1
               className={`text-[20px] hover:opacity-70 duration-300 ${
-                pathname === "/practise" ? "opacity-70" : "cursor-pointer"
+                pathname === "/practice" ? "opacity-70" : "cursor-pointer"
               }`}
             >
               Practice
