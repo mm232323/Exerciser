@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { getServerSession } from "next-auth";
 import { TbPlayCardStarFilled, TbVocabulary } from "react-icons/tb";
-const CreatePage: React.FC = () => {
+import { redirect } from "next/navigation";
+const CreatePage: React.FC = async () => {
+  const session = await getServerSession();
+  if (!session) redirect("/login");
   return (
     <main>
       <Image
@@ -10,7 +14,7 @@ const CreatePage: React.FC = () => {
         alt="background"
         width={1920}
         height={1080}
-        className="absolute z-[-10] top-0"
+        className="absolute z-[-10] top-0 w-max-[1440px] h-auto w-[1440px]"
       />
       <center>
         <Image

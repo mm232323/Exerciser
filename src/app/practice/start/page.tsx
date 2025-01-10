@@ -12,6 +12,7 @@ const StartPractice: React.FC = () => {
   const [practices, setPractices] = React.useState<practicedType[] | null>(
     null
   );
+  if (!session) redirect("/login");
   useEffect(() => {
     async function fetchUser() {
       if (session) {

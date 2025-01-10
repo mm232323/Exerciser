@@ -1,8 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import DeckForm from "@/components/forms/deck";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-const CreateDeckPage = () => {
+const CreateDeckPage: React.FC = async () => {
+  const session = await getServerSession();
+  if (!session) redirect("/login");
   return (
     <main className="flex items-center justify-center gap-[22px] w-full h-full">
       <DeckForm />

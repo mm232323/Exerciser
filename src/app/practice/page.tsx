@@ -6,8 +6,10 @@ import { MdSearch } from "react-icons/md";
 import DeckContainer from "@/components/practice/DeckContainer";
 import { deleteDeck, getUser } from "../../../actions/main";
 import { motion } from "framer-motion";
+import { redirect } from "next/navigation";
 const PracticePage: React.FC = () => {
   const { data: session } = useSession();
+  if (!session) redirect("/login");
   const [user, setUser] = useState<userInputType | null>(null);
   const [decks, setDecks] = useState<Deck[]>([]);
   const [decksQuery, setDeckQuery] = useState<string>("");

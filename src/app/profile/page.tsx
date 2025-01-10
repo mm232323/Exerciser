@@ -7,7 +7,7 @@ import Avatar from "@/components/profile/Avatar";
 import { redirect } from "next/navigation";
 export default async function ProfilePage() {
   const session = await getServerSession();
-  if (!session) redirect("/");
+  if (!session) redirect("/login");
   const email = session?.user?.email;
   const response = await fetch(`${process.env.SERVER_HOST}/auth/get-user`, {
     method: "POST",

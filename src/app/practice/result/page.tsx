@@ -14,6 +14,7 @@ const calligraf = Calligraffitti({
 });
 const ResultPage: React.FC = () => {
   const { data: session } = useSession();
+  if (!session) redirect("/login");
   const [user, setUser] = useState<null | userInputType>(null);
   useEffect(() => {
     async function fetchUser() {
