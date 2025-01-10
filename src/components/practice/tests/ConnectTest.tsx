@@ -11,25 +11,23 @@ const ConnectTest: React.FC<{
   test: TestType;
   onHandleComplete: (state: boolean, answer: string) => void;
 }> = ({ test, onHandleComplete }) => {
+  const properties = test.properties as connectTest;
+  const [keys, setKeys] = useState<string[]>([]);
+  const [values, setValues] = useState<string[]>([]);
+  useEffect(() => {
+    const newKeys: string[] = [];
+    const newValues: string[] = [];
+    for (let i = 0; i < properties.choosed.length; i++) {
+      newKeys.push(properties.choosed[i].name);
+      newValues.push(properties.choosed[i].translation);
+    }
+    shuffleArray(newKeys);
+    shuffleArray(newValues);
+    setKeys(() => newKeys);
+    setValues(() => newValues);
+  }, []);
   const [answers, setAnswers] = useState<string[][]>([]);
   const [answer, setAnswer] = useState<string[]>(["", ""]);
-  const properties = test.properties as connectTest;
-
-  const keys = React.useMemo(() => {
-    const k: string[] = [];
-    for (let i = 0; i < properties.choosed.length; i++) {
-      k.push(properties.choosed[i].name);
-    }
-    return k;
-  }, [properties.choosed]);
-
-  const values = React.useMemo(() => {
-    const v: string[] = [];
-    for (let i = 0; i < properties.choosed.length; i++) {
-      v.push(properties.choosed[i].translation);
-    }
-    return v;
-  }, [properties.choosed]);
 
   const handleAnswer = (value: string, dir: string) => {
     if (dir == "right") {
@@ -62,10 +60,6 @@ const ConnectTest: React.FC<{
       }
     }
   };
-  useEffect(() => {
-    shuffleArray(keys);
-    shuffleArray(values);
-  }, []);
   const selectedKeys = answers.map((answer) => answer[0]);
   const selectedValues = answers.map((answer) => answer[1]);
   return (

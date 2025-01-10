@@ -15,7 +15,6 @@ const PracticeQuizPage: React.FC = () => {
   const [testIdx, setTestIdx] = useState<number>(0);
   const [testState, setTestState] = useState<boolean>(false);
   const [testAnswer, setTestAnswer] = useState<string>("");
-  if (tests !== null && tests.length == 0) redirect("/practice");
   useEffect(() => {
     async function getTests() {
       if (session?.user) {

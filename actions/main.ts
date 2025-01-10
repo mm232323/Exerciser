@@ -257,3 +257,17 @@ export async function setPracticedTest() {
   const { message } = await response.json();
   console.log(message);
 }
+export async function deActivatePractice(email: string) {
+  const response = await fetch(
+    `${process.env.SERVER_HOST}/de-activate-practice`,
+    {
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "appllication/json",
+      },
+    }
+  );
+  const { message } = await response.json();
+  console.log(message);
+}
