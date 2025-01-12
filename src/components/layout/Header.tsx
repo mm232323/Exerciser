@@ -25,7 +25,9 @@ const Header: React.FC = () => {
   return (
     <center>
       <header className="flex items-center p-4 max-w-fit mt-4 gap-[30px]">
-        <Image src="/logo.svg" alt="logo" width={100} height={100} />
+        <Link href="/">
+          <Image src="/logo.svg" alt="logo" width={100} height={100} />
+        </Link>
         <div className="flex space-x-[40px] p-[30px] bg-[#E4E3E3] rounded-[10px] border-[#49243ea8] border-[.2px]">
           <Link href="/">
             <h1

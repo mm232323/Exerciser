@@ -149,10 +149,6 @@ export async function deleteDeck(deckName: string, email: string) {
 }
 
 export async function prepareQuestions(deckName: string) {
-  const tests = new Array(20).fill({
-    name: "",
-    properties: {},
-  });
   const session = await getServerSession();
   const response = await fetch(`${process.env.SERVER_HOST}/user/get-deck`, {
     method: "POST",
@@ -162,6 +158,10 @@ export async function prepareQuestions(deckName: string) {
     },
   });
   const { deck }: { deck: Deck } = await response.json();
+  const tests = new Array(deck.cards.length * 5).fill({
+    name: "",
+    properties: {},
+  });
   const types = ["meaning", "choose", "complete", "trueorfalse", "connect"];
   for (let i = 0; i < tests.length; i++) {
     const type = types[Math.floor(Math.random() * types.length)];
