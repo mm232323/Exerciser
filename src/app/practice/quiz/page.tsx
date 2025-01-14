@@ -33,7 +33,7 @@ const PracticeQuizPage: React.FC = () => {
     setTestAnswer(answer);
   };
   const handleSwitch = () => {
-    if (testIdx == 19) {
+    if (testIdx == tests.length-1) {
       setPracticedTest();
       redirect("/practice/result");
     } else {
@@ -57,7 +57,7 @@ const PracticeQuizPage: React.FC = () => {
         dir="rtl"
         className="font-light text-[25px] opacity-70 relative right-[50px] mt-[10px]"
       >
-        {testIdx + 1}/20
+        {testIdx + 1}/{tests.length}
       </h1>
       <AnimatePresence>
         {(tests as TestType[]).map((test, idx) =>
