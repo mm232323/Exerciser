@@ -80,7 +80,7 @@ const PracticeQuizPage: React.FC = () => {
         onClick={handleSwitch}
       >
         <FaLongArrowAltRight size={30} color="#49243E" />
-        <p className="font-normal text-[22px]">Next Exerciser</p>
+        <p className="font-normal text-[22px]">Next Exercise</p>
       </div>
     </main>
   );
