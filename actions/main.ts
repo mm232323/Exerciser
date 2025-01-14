@@ -231,7 +231,7 @@ export async function setPracticedTest() {
   const user = (await getUser(session?.user?.email as string)) as userInputType;
   const { tests, deck } = user.progress;
   const language = user.decks.filter((d) => d.name == deck)[0].lang;
-  const MAX_SCORE = 20;
+  const MAX_SCORE = tests.length;
   let points = 0;
   for (let i = 0; i < tests.length; i++) {
     if (
