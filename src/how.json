@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Firstly, That's the Home page that includes all the links to the other pages.",
+    "recImg": "/how/rec1.png"
+  },
+  {
+    "title": "Signup Page, where you can create an account, manually or using Google.",
+    "recImg": "/how/rec2.png"
+  },
+  {
+    "title": "Login Page, where you must login to access the admin pages.",
+    "recImg": "/how/rec3.png"
+  },
+  {
+    "title": "Profile Page, where you can see your profile, your scores and you can edit it.",
+    "recImg": "/how/rec4.png"
+  },
+  {
+    "title": "Create Page, where you can create a new Deck or a new Card.",
+    "recImg": "/how/rec5.png"
+  },
+  {
+    "title": "Deck Page, where you can make a new deck, add cards to it and edit it.",
+    "recImg": "/how/rec6.png"
+  },
+  {
+    "title": "Card Page, where you can make a new card, add it to a deck and edit its properties.",
+    "recImg": "/how/rec7.png"
+  },
+  {
+    "title": "Practice Page, where you can see your decks and practice them or remove them.",
+    "recImg": "/how/rec8.png"
+  },
+  {
+    "title": "Starting Page, where you can see the starting page of the quiz and includes all the quiz details.",
+    "recImg": "/how/rec9.png"
+  },
+  {
+    "title": "Meaning Quiz, where you asked to answer the translation of the card.",
+    "recImg": "/how/rec10.png"
+  },
+  {
+    "title": "Choose Quiz, where you asked to choose the correct translation of the card.",
+    "recImg": "/how/rec11.png"
+  },
+  {
+    "title": "Complete Quiz, where you asked to complete the missing letters of the translation.",
+    "recImg": "/how/rec12.png"
+  },
+  {
+    "title": "TrueOrFalse Quiz, where you asked to answer if the translation or word Type is true or false.",
+    "recImg": "/how/rec13.png"
+  },
+  {
+    "title": "Connecting Quiz, where you asked to connect the words with its translations.",
+    "recImg": "/how/rec14.png"
+  },
+  {
+    "title": "Result Page, where you can see your score and the wrong answers answers.",
+    "recImg": "/how/rec15.png"
+  }
+]

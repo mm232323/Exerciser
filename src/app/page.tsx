@@ -1,9 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 const Home: React.FC = async () => {
-  const user = await getServerSession();
   return (
     <div className="">
       <Image
@@ -11,7 +9,7 @@ const Home: React.FC = async () => {
         alt="home background"
         width={1920}
         height={1080}
-        className="object-cover absolute z-[-10] top-0"
+        className=" w-[1440px] min-w-[1440px] h-auto absolute z-[-10] top-0"
       />
       <h1 className="text-[75px] font-black text-center text-strock mt-[70px] leading-[90px] text-shadow">
         practice your <span className="text-[#BB8493]">vocabularies</span> with
@@ -23,7 +21,7 @@ const Home: React.FC = async () => {
           vocabulary in powerful and efficient ways!
         </p>
       </center>
-      <Link href={!user ? "/login" : "/profile"}>
+      <Link href="/how-to-use">
         <div className="flex justify-center relative mt-[70px] items-center but-container">
           <button className="bg-[#321529] text-white p-[22px] rounded-[25px] font-thin text-[30px] absolute">
             Start now <span className="text-[18px]">it&apos;s free</span>
